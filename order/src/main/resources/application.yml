@@ -1,0 +1,30 @@
+#server:
+#  port: 8012
+#spring:
+#  application:
+#    name: order
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://172.16.30.103:3306/sell?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false
+#  jpa:
+#    show-sql: true
+#  jackson:
+#    default-property-inclusion: non_null
+#  redis:
+#    host: 172.16.30.103
+#    port: 6379
+#    password:
+#
+#eureka:
+#  client:
+#    serviceUrl:
+##      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: http://${eurekaServer.host1.hostName}:${eurekaServer.host1.port}/eureka/
+#
+#eurekaServer:
+#  host1:
+#    hostName: 119.27.175.187
+#    port: 8761
+

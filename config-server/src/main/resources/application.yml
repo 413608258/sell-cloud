@@ -1,0 +1,32 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/413608258/config-repo
+#          basedir 可以设置配置文件本地仓库地址，不设置也可
+          basedir: G:\config\basedir
+  rabbitmq:
+    host: 172.16.30.103
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${eurekaServer.host1.hostName}:${eurekaServer.host1.port}/eureka/
+
+eurekaServer:
+  host1:
+    hostName: 119.27.175.187
+    port: 8761
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
