@@ -7,6 +7,23 @@ spring:
         enabled: true
         service-id: config-server
       profile: dev
+    stream:
+      bindings:
+        inputMessage:
+#         给该消息分组,保证每一个消息只被分组中的一个实例消费
+#          group: demo
+#         设置在MQ控制台查看消息格式为 json
+          content-type: application/json
+          destination: minestream
+        outputMessage:
+          destination: minestream
+        inputMessage2:
+          content-type: application/json
+          destination: minestream2
+        outputMessage2:
+          destination: minestream2
+  #    bus:
+#      id: config-server
   rabbitmq:
     host: 172.16.30.103
     port: 5672

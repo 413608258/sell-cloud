@@ -1,0 +1,30 @@
+zuul:
+  routes:
+    product:
+      serviceId: product
+#      /任意前缀/任意层目录
+      path: /*/**
+#      是否剥离前缀
+      stripPrefix: false
+#      sensitiveHeaders:
+    user:
+      serviceId: user
+      path: /*/**
+      stripPrefix: false
+    order:
+      serviceId: order
+      path: /*/**
+      stripPrefix: false
+#  Cookie 敏感头过滤
+  sensitive-headers:
+#      简介写法,但是默认剥离路由
+#    product: /*/**
+
+#  排除某些路由
+#  ignored-patterns:
+#    - /**/product/findOne/**
+spring:
+  redis:
+    host: 172.16.30.103
+    port: 6379
+    password:

@@ -13,6 +13,8 @@ import com.lous.product.utils.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,8 @@ public class BuyerProductController {
     @GetMapping("/list")
     //TODO: Redis缓存相关注解 spel表达式可动态传key, condition：满足条件缓存， unless: 满足条件就不缓存，
     //@Cacheable(cacheNames = "product", key = "123", condition = "", unless = "#result.getCode() != 0")
-    public ResultVO list(){
+    public ResultVO list(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
         //1.查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
         List<ProductInfoVO> productInfoVOList = JSON.parseArray(JSON.toJSONString(productInfoList), ProductInfoVO.class);
@@ -69,6 +72,10 @@ public class BuyerProductController {
         ProductInfo productInfo = productService.findOne(productId);
         return ResultVOUtil.success(productInfo);
     }
+
+    /**
+     * 扣库存
+     */
     @PostMapping("/decreaseStock")
     public void decreaseStock(@RequestBody List<CartDTO> cartDTOList){
         productService.decreaseStock(cartDTOList);

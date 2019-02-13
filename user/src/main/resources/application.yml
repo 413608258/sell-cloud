@@ -1,0 +1,18 @@
+server:
+  port: 8013
+spring:
+  application:
+    name: user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://172.16.30.103:3306/sell?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+    host: 172.16.30.103
+    port: 6379
+    password:

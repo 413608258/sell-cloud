@@ -10,6 +10,8 @@ spring:
           uri: https://github.com/413608258/config-repo
 #          basedir 可以设置配置文件本地仓库地址，不设置也可
           basedir: G:\config\basedir
+#    bus:
+#      id: config-server
   rabbitmq:
     host: 172.16.30.103
     port: 5672
@@ -30,3 +32,4 @@ management:
     web:
       exposure:
         include: "*"
+

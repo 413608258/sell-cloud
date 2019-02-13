@@ -35,6 +35,7 @@ public interface ProductClient {
         @Override
         public ResultVO findOne(String productId) {
             throw new RuntimeException();
+            //return new ResultVO();
         }
 
         @Override

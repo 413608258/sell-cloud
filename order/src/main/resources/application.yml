@@ -1,3 +1,4 @@
+
 #server:
 #  port: 8012
 #spring:
@@ -27,4 +28,40 @@
 #  host1:
 #    hostName: 119.27.175.187
 #    port: 8761
-
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+    finish:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+feign:
+  hystrix:
+    enabled: true
+#springboot2.0 之后hystrix dashboard 需要配置此项
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["health","info","hystrix.stream"]
+#        include: "*"
+spring:
+  zipkin:
+    base-url: http://172.16.30.103:9411
+#    enabled: true
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+#    web:
+#      client:
+#        enabled: true
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug

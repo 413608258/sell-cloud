@@ -9,6 +9,8 @@ import com.lous.order.form.OrderForm;
 import com.lous.order.service.IBuyerService;
 import com.lous.order.service.IOrderService;
 import com.lous.order.utils.ResultVOUtil;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -81,11 +83,28 @@ public class BuyerOrderController {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
         return ResultVOUtil.success(orderDTO);
     }
-    //取消订单
-    @PostMapping("/cancel")
-    public ResultVO cancel(@RequestParam("openid") String openid,
-                            @RequestParam("orderId") String orderId){
-        buyerService.cancelOrder(openid, orderId);
+    //完结订单
+    @PostMapping("/finish")
+    //跨域
+    //@CrossOrigin(allowCredentials = "true")
+    /*@HystrixCommand(fallbackMethod = "fallback",commandProperties = {
+            //设置请求超时时间，默认1000毫秒，我们改成3000毫秒
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+    })*/
+    /*@HystrixCommand(commandProperties = {
+            //设置熔断
+            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
+    })*/
+    public ResultVO finish(@RequestParam("orderId") String orderId){
+        /**
+         * TODO: 逻辑暂时未写
+         */
         return ResultVOUtil.success();
+    }
+    private String fallback(){
+        return "太拥挤咯，请稍后再试~~";
     }
 }
